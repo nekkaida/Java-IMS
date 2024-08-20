@@ -1,21 +1,22 @@
 package com.inventoryapp.main;
 
-import com.inventoryapp.database.DatabaseConnection;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+public class MainApp extends Application {
 
-public class MainApp {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/com/inventoryapp/fxml/dashboard.fxml"));
+        primaryStage.setTitle("Inventory Management System");
+        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.show();
+    }
 
     public static void main(String[] args) {
-        try (Connection connection = DatabaseConnection.getConnection()) {
-            if (connection != null) {
-                System.out.println("Connected to the database!");
-            } else {
-                System.out.println("Failed to connect to the database.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        launch(args);
     }
 }
